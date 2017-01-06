@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-01-06 01:06:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Obecnosci" table="obecnosci" catalog="io" optimistic-lock="version">
+        <id name="ido" type="java.lang.Integer">
+            <column name="ido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="lekcje" class="model.Lekcje" fetch="select">
+            <column name="Lekcje_idl" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nauczyciele" class="model.Nauczyciele" fetch="select">
+            <column name="Nauczyciele_idn" not-null="true" />
+        </many-to-one>
+        <many-to-one name="uczniowie" class="model.Uczniowie" fetch="select">
+            <column name="Uczniowie_idu" not-null="true" />
+        </many-to-one>
+        <property name="obecnosc" type="boolean">
+            <column name="obecnosc" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

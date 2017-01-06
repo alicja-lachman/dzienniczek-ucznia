@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-01-06 01:06:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Nauczyciele" table="nauczyciele" catalog="io" optimistic-lock="version">
+        <id name="idn" type="java.lang.Integer">
+            <column name="idn" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="uzytkownicy" class="model.Uzytkownicy" fetch="select">
+            <column name="Uzytkownicy_iduz" not-null="true" />
+        </many-to-one>
+        <set name="ocenies" table="oceny" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Nauczyciele_idn" not-null="true" />
+            </key>
+            <one-to-many class="model.Oceny" />
+        </set>
+        <set name="klasies" table="klasy" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Nauczyciele_idn" not-null="true" />
+            </key>
+            <one-to-many class="model.Klasy" />
+        </set>
+        <set name="obecnoscis" table="obecnosci" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Nauczyciele_idn" not-null="true" />
+            </key>
+            <one-to-many class="model.Obecnosci" />
+        </set>
+        <set name="przedmioties" table="przedmioty" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Nauczyciele_idn" not-null="true" />
+            </key>
+            <one-to-many class="model.Przedmioty" />
+        </set>
+        <set name="wydarzenies" table="wydarzenie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Nauczyciele_idn" not-null="true" />
+            </key>
+            <one-to-many class="model.Wydarzenie" />
+        </set>
+        <set name="uwagas" table="uwaga" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Nauczyciele_idn" not-null="true" />
+            </key>
+            <one-to-many class="model.Uwaga" />
+        </set>
+    </class>
+</hibernate-mapping>

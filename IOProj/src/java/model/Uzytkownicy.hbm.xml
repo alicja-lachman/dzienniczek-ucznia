@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-01-06 01:06:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Uzytkownicy" table="uzytkownicy" catalog="io" optimistic-lock="version">
+        <id name="iduz" type="java.lang.Integer">
+            <column name="iduz" />
+            <generator class="identity" />
+        </id>
+        <property name="imie" type="string">
+            <column name="Imie" length="45" not-null="true" />
+        </property>
+        <property name="nazwisko" type="string">
+            <column name="Nazwisko" length="45" not-null="true" />
+        </property>
+        <property name="pesel" type="string">
+            <column name="Pesel" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="adres" type="string">
+            <column name="Adres" length="45" not-null="true" />
+        </property>
+        <set name="wiadomoscsForIdOdbiorca" table="wiadomosc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_odbiorca" not-null="true" />
+            </key>
+            <one-to-many class="model.Wiadomosc" />
+        </set>
+        <set name="wiadomoscsForIdNadawca" table="wiadomosc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_nadawca" not-null="true" />
+            </key>
+            <one-to-many class="model.Wiadomosc" />
+        </set>
+        <set name="dyrektorzies" table="dyrektorzy" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Uzytkownicy_iduz" not-null="true" />
+            </key>
+            <one-to-many class="model.Dyrektorzy" />
+        </set>
+        <set name="nauczycieles" table="nauczyciele" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Uzytkownicy_iduz" not-null="true" />
+            </key>
+            <one-to-many class="model.Nauczyciele" />
+        </set>
+        <set name="uczniowies" table="uczniowie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Uzytkownicy_iduz" not-null="true" />
+            </key>
+            <one-to-many class="model.Uczniowie" />
+        </set>
+        <set name="rodzices" table="rodzice" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Uzytkownicy_iduz" not-null="true" />
+            </key>
+            <one-to-many class="model.Rodzice" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-01-06 01:06:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Dyrektorzy" table="dyrektorzy" catalog="io" optimistic-lock="version">
+        <id name="idd" type="java.lang.Integer">
+            <column name="idd" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="uzytkownicy" class="model.Uzytkownicy" fetch="select">
+            <column name="Uzytkownicy_iduz" not-null="true" />
+        </many-to-one>
+        <set name="plans" table="plan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Dyrektorzy_idd" not-null="true" />
+            </key>
+            <one-to-many class="model.Plan" />
+        </set>
+    </class>
+</hibernate-mapping>
