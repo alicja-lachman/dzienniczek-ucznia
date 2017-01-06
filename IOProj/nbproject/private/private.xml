@@ -5,7 +5,10 @@
         <group>
             <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/hibernate.reveng.xml</file>
             <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/model/Nauczyciele.java</file>
+            <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/model/Plan.hbm.xml</file>
+            <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/model/Dyrektorzy.hbm.xml</file>
             <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/model/Nauczyciele.hbm.xml</file>
+            <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/model/Uzytkownicy.java</file>
             <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/hibernate.cfg.xml</file>
             <file>file:/C:/Users/m_lig/OneDrive/Documents/IO/dzienniczek-ucznia/IOProj/src/java/model/Klasy.java</file>
         </group>
