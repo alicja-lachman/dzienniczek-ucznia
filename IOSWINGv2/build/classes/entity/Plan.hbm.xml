@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-01-06 14:50:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Plan" table="plan" catalog="io" optimistic-lock="version">
+        <id name="idp" type="java.lang.Integer">
+            <column name="idp" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="dyrektorzy" class="entity.Dyrektorzy" fetch="select">
+            <column name="Dyrektorzy_idd" not-null="true" />
+        </many-to-one>
+        <property name="dzien" type="string">
+            <column name="Dzien" length="15" not-null="true" />
+        </property>
+        <property name="godzina" type="string">
+            <column name="Godzina" length="20" />
+        </property>
+        <property name="lekcja" type="string">
+            <column name="Lekcja" length="45" not-null="true" />
+        </property>
+        <set name="lekcjes" table="lekcje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Plan_idp" not-null="true" />
+            </key>
+            <one-to-many class="entity.Lekcje" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-01-06 14:50:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Wydarzenie" table="wydarzenie" catalog="io" optimistic-lock="version">
+        <id name="idWyd" type="java.lang.Integer">
+            <column name="idWyd" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="nauczyciele" class="entity.Nauczyciele" fetch="select">
+            <column name="Nauczyciele_idn" not-null="true" />
+        </many-to-one>
+        <property name="nazwa" type="string">
+            <column name="Nazwa" length="45" not-null="true" />
+        </property>
+        <property name="data" type="timestamp">
+            <column name="Data" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

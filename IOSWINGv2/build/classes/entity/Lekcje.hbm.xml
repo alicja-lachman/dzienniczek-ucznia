@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-01-06 14:50:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Lekcje" table="lekcje" catalog="io" optimistic-lock="version">
+        <id name="idl" type="java.lang.Integer">
+            <column name="idl" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="klasy" class="entity.Klasy" fetch="select">
+            <column name="Klasy_idk" not-null="true" />
+        </many-to-one>
+        <many-to-one name="plan" class="entity.Plan" fetch="select">
+            <column name="Plan_idp" not-null="true" />
+        </many-to-one>
+        <many-to-one name="przedmioty" class="entity.Przedmioty" fetch="select">
+            <column name="Przedmioty_idprz" not-null="true" />
+        </many-to-one>
+        <set name="obecnoscis" table="obecnosci" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Lekcje_idl" not-null="true" />
+            </key>
+            <one-to-many class="entity.Obecnosci" />
+        </set>
+        <set name="salas" table="sala" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Lekcje_idl" not-null="true" />
+            </key>
+            <one-to-many class="entity.Sala" />
+        </set>
+    </class>
+</hibernate-mapping>
