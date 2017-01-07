@@ -43,10 +43,11 @@ public class ApplicationView extends JFrame {
         JMenuItem listAllStudents = new JMenuItem("List all students");
         listAllStudents.setActionCommand(ActionCommands.LIST_STUDENT);
         listAllStudents.addActionListener(listener);
-        
+
         listMenu.add(listAllStudents);
-        menuBar.add(listMenu);
+
         menuBar.add(addMenu);
+        menuBar.add(listMenu);
         setJMenuBar(menuBar);
     }
 

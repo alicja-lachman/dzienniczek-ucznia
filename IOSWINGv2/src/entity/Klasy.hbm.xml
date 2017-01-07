@@ -17,9 +17,6 @@
         <property name="rocznik" type="timestamp">
             <column name="Rocznik" length="19" not-null="true" />
         </property>
-        <property name="idw" type="int">
-            <column name="idw" not-null="true" />
-        </property>
         <set name="uczniowies" table="uczniowie" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Klasy_idk" not-null="true" />

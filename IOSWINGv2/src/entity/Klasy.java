@@ -32,7 +32,6 @@ public class Klasy  implements java.io.Serializable {
      private Nauczyciele nauczyciele;
      private String nazwa;
      private Date rocznik;
-     private int idw;
      private Set<Uczniowie> uczniowies = new HashSet<Uczniowie>(0);
      private Set<Lekcje> lekcjes = new HashSet<Lekcje>(0);
 
@@ -40,17 +39,15 @@ public class Klasy  implements java.io.Serializable {
     }
 
 	
-    public Klasy(Nauczyciele nauczyciele, String nazwa, Date rocznik, int idw) {
+    public Klasy(Nauczyciele nauczyciele, String nazwa, Date rocznik) {
         this.nauczyciele = nauczyciele;
         this.nazwa = nazwa;
         this.rocznik = rocznik;
-        this.idw = idw;
     }
-    public Klasy(Nauczyciele nauczyciele, String nazwa, Date rocznik, int idw, Set<Uczniowie> uczniowies, Set<Lekcje> lekcjes) {
+    public Klasy(Nauczyciele nauczyciele, String nazwa, Date rocznik, Set<Uczniowie> uczniowies, Set<Lekcje> lekcjes) {
        this.nauczyciele = nauczyciele;
        this.nazwa = nazwa;
        this.rocznik = rocznik;
-       this.idw = idw;
        this.uczniowies = uczniowies;
        this.lekcjes = lekcjes;
     }
@@ -97,15 +94,6 @@ public class Klasy  implements java.io.Serializable {
         this.rocznik = rocznik;
     }
 
-    
-    @Column(name="idw", nullable=false)
-    public int getIdw() {
-        return this.idw;
-    }
-    
-    public void setIdw(int idw) {
-        this.idw = idw;
-    }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="klasy")
     public Set<Uczniowie> getUczniowies() {
