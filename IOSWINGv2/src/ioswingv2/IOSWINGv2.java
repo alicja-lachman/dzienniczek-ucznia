@@ -5,6 +5,9 @@
  */
 package ioswingv2;
 
+import java.awt.EventQueue;
+import view.MainView;
+
 /**
  *
  * @author m_lig
@@ -15,7 +18,11 @@ public class IOSWINGv2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainView().setVisible(true);
+            }
+        });
     }
-    
+
 }
