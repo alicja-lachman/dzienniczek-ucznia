@@ -1,5 +1,8 @@
 package view.dialog;
 
+import entity.Klasy;
+import entity.Uczniowie;
+import entity.Uzytkownicy;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
@@ -11,7 +14,10 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import static javax.swing.GroupLayout.Alignment.CENTER;
@@ -26,6 +32,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import util.HibernateUtil;
 
 /**
  *
@@ -98,12 +108,13 @@ public class AddStudentDialog extends JDialog {
         constraints.anchor = GridBagConstraints.SOUTH;
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener((ActionEvent e)-> dispose());
+        cancelButton.addActionListener((ActionEvent e) -> dispose());
 
         JButton okButton = new JButton("Ok");
         okButton.addActionListener((ActionEvent e) -> {
             if (allFieldsAreValid()) {
                 createNewStudent();
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(getRootPane(),
                         "Fill all fields!",
@@ -133,7 +144,38 @@ public class AddStudentDialog extends JDialog {
     }
 
     private void createNewStudent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Uzytkownicy dbUser;
+        String QUERY_CLASS_ID = "from Klasy k where k.idk='";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        //create new user
+        Uzytkownicy user = new Uzytkownicy(name.getText(), surname.getText(),
+                pesel.getText(), address.getText());
+        //add user to database
+        session.save(user);
+
+        //find given class in database
+        Query q = session.createQuery(QUERY_CLASS_ID + className.getText() + "%'");
+        List<Klasy> resultList = q.list();
+        Klasy dbClass = resultList.get(0);
+
+        //find created user in database
+        List<Uzytkownicy> uzytkownicy = new ArrayList<>();
+        uzytkownicy = session.createCriteria(Uzytkownicy.class)
+                .list();
+
+        //most recently created user
+        dbUser = uzytkownicy.get(uzytkownicy.size() - 1);
+
+        //create new student
+        Uczniowie student = new Uczniowie(dbClass, dbUser);
+        session.save(student);
+        
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
     }
 
 }
