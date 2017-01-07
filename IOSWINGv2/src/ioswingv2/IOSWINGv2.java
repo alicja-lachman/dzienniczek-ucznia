@@ -5,8 +5,9 @@
  */
 package ioswingv2;
 
+import controller.ApplicationController;
 import java.awt.EventQueue;
-import view.MainView;
+import view.ApplicationView;
 
 /**
  *
@@ -20,9 +21,12 @@ public class IOSWINGv2 {
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainView().setVisible(true);
+                ApplicationView view = new ApplicationView();
+                ApplicationController controller = new ApplicationController(view);
+                view.setVisible(true);
+                
             }
         });
     }
-
+    
 }
