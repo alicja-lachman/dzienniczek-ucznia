@@ -2,11 +2,14 @@ package view;
 
 import controller.ApplicationController;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import util.ActionCommands;
+import util.HibernateUtil;
 
 /**
  *
@@ -25,7 +28,12 @@ public class ApplicationView extends JFrame {
     private void setupGUI() {
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                HibernateUtil.getSessionFactory().close();
+                System.exit(0);//cierra aplicacion
+            }
+        });
 
         setupMenu();
     }
