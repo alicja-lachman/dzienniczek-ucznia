@@ -23,6 +23,7 @@ import javax.swing.GroupLayout;
 import static javax.swing.GroupLayout.Alignment.CENTER;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -47,7 +48,7 @@ public class AddStudentDialog extends JDialog {
     JTextField surname;
     JTextField pesel;
     JTextField address;
-    JTextField className;
+    JComboBox className;
 
     public AddStudentDialog(Frame parent) {
         super(parent);
@@ -60,7 +61,7 @@ public class AddStudentDialog extends JDialog {
         surname = new JTextField(15);
         pesel = new JTextField(15);
         address = new JTextField(15);
-        className = new JTextField(30);
+        className = new JComboBox(getClassIds().toArray());
 
         setResizable(false);
         setTitle("Add new student");
@@ -140,9 +141,19 @@ public class AddStudentDialog extends JDialog {
 
     private boolean allFieldsAreValid() {
         return !name.getText().isEmpty() && !surname.getText().isEmpty() && !pesel.getText().isEmpty()
-                && !address.getText().isEmpty() && !className.getText().isEmpty();
+                && !address.getText().isEmpty();
     }
 
+    private List<String> getClassIds(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+      
+        List<String> classIds = session.createCriteria(Klasy.class)
+                .setProjection(Projections.property("idk"))
+                .list();
+        
+          session.close();
+          return classIds;
+    }
     private void createNewStudent() {
         Uzytkownicy dbUser;
         Klasy dbClass;
@@ -159,7 +170,7 @@ public class AddStudentDialog extends JDialog {
 
         //find given class in database
         try {
-            Query q = session.createQuery(QUERY_CLASS_ID + className.getText() + "%'");
+            Query q = session.createQuery(QUERY_CLASS_ID + className.getSelectedItem() + "%'");
             List<Klasy> resultList = q.list();
             dbClass = resultList.get(0);
         } catch (IndexOutOfBoundsException e) {
