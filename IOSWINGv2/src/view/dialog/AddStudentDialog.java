@@ -145,6 +145,7 @@ public class AddStudentDialog extends JDialog {
 
     private void createNewStudent() {
         Uzytkownicy dbUser;
+        Klasy dbClass;
         String QUERY_CLASS_ID = "from Klasy k where k.idk='";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -157,9 +158,17 @@ public class AddStudentDialog extends JDialog {
         session.save(user);
 
         //find given class in database
-        Query q = session.createQuery(QUERY_CLASS_ID + className.getText() + "%'");
-        List<Klasy> resultList = q.list();
-        Klasy dbClass = resultList.get(0);
+        try {
+            Query q = session.createQuery(QUERY_CLASS_ID + className.getText() + "%'");
+            List<Klasy> resultList = q.list();
+            dbClass = resultList.get(0);
+        } catch (IndexOutOfBoundsException e) {
+            session.getTransaction().rollback();
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Wrong class id",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         //find created user in database
         List<Uzytkownicy> uzytkownicy = new ArrayList<>();
@@ -172,7 +181,7 @@ public class AddStudentDialog extends JDialog {
         //create new student
         Uczniowie student = new Uczniowie(dbClass, dbUser);
         session.save(student);
-        
+
         //Commit the transaction
         session.getTransaction().commit();
         session.close();
