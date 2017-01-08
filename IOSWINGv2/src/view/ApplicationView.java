@@ -31,7 +31,7 @@ public class ApplicationView extends JFrame {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 HibernateUtil.getSessionFactory().close();
-                System.exit(0);//cierra aplicacion
+                System.exit(0);
             }
         });
 

@@ -14,8 +14,10 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -36,6 +38,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import util.ClassDataParser;
 import util.HibernateUtil;
 
 /**
@@ -61,7 +64,7 @@ public class AddStudentDialog extends JDialog {
         surname = new JTextField(15);
         pesel = new JTextField(15);
         address = new JTextField(15);
-        className = new JComboBox(getClassIds().toArray());
+        className = new JComboBox(getClassInfo().toArray());
 
         setResizable(false);
         setTitle("Add new student");
@@ -144,20 +147,26 @@ public class AddStudentDialog extends JDialog {
                 && !address.getText().isEmpty();
     }
 
-    private List<String> getClassIds(){
+    private List<String> getClassInfo() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-      
-        List<String> classIds = session.createCriteria(Klasy.class)
-                .setProjection(Projections.property("idk"))
+
+        List<Klasy> classes = session.createCriteria(Klasy.class)
                 .list();
-        
-          session.close();
-          return classIds;
+        List<String> classInfo = new ArrayList<>();
+        for (Klasy dbClass : classes) {
+
+            SimpleDateFormat df = new SimpleDateFormat("yyyy");
+            String year = df.format(dbClass.getRocznik());
+            classInfo.add(dbClass.getNazwa() + " " + year);
+        }
+        session.close();
+        return classInfo;
     }
+
     private void createNewStudent() {
         Uzytkownicy dbUser;
         Klasy dbClass;
-        String QUERY_CLASS_ID = "from Klasy k where k.idk='";
+        String QUERY_CLASS_ID = "from Klasy k where k.nazwa='";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -170,7 +179,11 @@ public class AddStudentDialog extends JDialog {
 
         //find given class in database
         try {
-            Query q = session.createQuery(QUERY_CLASS_ID + className.getSelectedItem() + "%'");
+            Query q = session.createQuery(QUERY_CLASS_ID
+                    + ClassDataParser.getClassName((String) className.getSelectedItem())
+                    + "' and year(k.rocznik) = '"
+                    + ClassDataParser.getClassYear((String) className.getSelectedItem())
+                    + "'");
             List<Klasy> resultList = q.list();
             dbClass = resultList.get(0);
         } catch (IndexOutOfBoundsException e) {
