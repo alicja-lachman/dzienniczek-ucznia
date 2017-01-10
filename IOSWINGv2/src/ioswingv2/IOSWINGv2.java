@@ -19,13 +19,10 @@ public class IOSWINGv2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ApplicationView view = new ApplicationView();
-                ApplicationController controller = new ApplicationController(view);
-                view.setVisible(true);
-                
-            }
+        EventQueue.invokeLater(() -> {
+            ApplicationView view = new ApplicationView();
+            ApplicationController controller = new ApplicationController(view);
+            view.setVisible(true);
         });
     }
     

@@ -1,6 +1,5 @@
 package view;
 
-import controller.ApplicationController;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -47,6 +46,12 @@ public class ApplicationView extends JFrame {
         addStudentItem.addActionListener(listener);
         addMenu.add(addStudentItem);
 
+        JMenu gradeMenu = new JMenu("Add new grade");
+        JMenuItem addGradeItem = new JMenuItem("Add new grade");
+        addGradeItem.setActionCommand(ActionCommands.ADD_GRADE);
+        addGradeItem.addActionListener(listener);
+        gradeMenu.add(addGradeItem);
+
         JMenu listMenu = new JMenu("List all...");
         JMenuItem listAllStudents = new JMenuItem("List all students");
         listAllStudents.setActionCommand(ActionCommands.LIST_STUDENT);
@@ -55,6 +60,7 @@ public class ApplicationView extends JFrame {
         listMenu.add(listAllStudents);
 
         menuBar.add(addMenu);
+        menuBar.add(gradeMenu);
         menuBar.add(listMenu);
         setJMenuBar(menuBar);
     }
