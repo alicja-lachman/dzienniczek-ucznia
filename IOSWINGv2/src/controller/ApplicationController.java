@@ -1,20 +1,23 @@
-
 package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JDialog;
 import util.ActionCommands;
 import view.ApplicationView;
 import view.dialog.AddStudentDialog;
+import view.dialog.AddTeacherDialog;
+import view.dialog.ListDialog;
 
 /**
  *
  * @author alachman
  */
 public class ApplicationController implements ActionListener {
+
     private ApplicationView view;
-    
-    public ApplicationController(ApplicationView view){
+
+    public ApplicationController(ApplicationView view) {
         this.view = view;
         this.view.addListener(this);
         this.view.setup();
@@ -22,15 +25,22 @@ public class ApplicationController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       switch(e.getActionCommand()){
-           case(ActionCommands.ADD_STUDENT):
-               AddStudentDialog dialog = new AddStudentDialog(view);
-               dialog.setVisible(true);
-               break;
-               case(ActionCommands.LIST_STUDENT):
-                   listAllStudents();
-                   break;
-       }
+        JDialog dialog;
+        switch (e.getActionCommand()) {
+            case (ActionCommands.ADD_STUDENT):
+                dialog = new AddStudentDialog(view);
+                dialog.setVisible(true);
+                break;
+            case (ActionCommands.ADD_TEACHER):
+                dialog = new AddTeacherDialog(view);
+                dialog.setVisible(true);
+                break;
+            case (ActionCommands.LIST_STUDENT):
+                dialog = new ListDialog(view);
+                dialog.setVisible(true);
+                break;
+
+        }
     }
 
     private void listAllStudents() {
