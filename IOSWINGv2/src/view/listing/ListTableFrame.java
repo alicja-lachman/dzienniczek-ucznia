@@ -8,16 +8,15 @@ package view.listing;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import org.hibernate.mapping.Column;
 import org.hibernate.mapping.PersistentClass;
 
 /**
@@ -53,12 +52,16 @@ public class ListTableFrame extends JFrame {
         this.pack();
     }
 
-    private void getColumnsInfo() {
+    private void getColumnsInfo() throws SQLException {
         ArrayList<String> columnNames = new ArrayList<>();
-        Iterator iter = classInfo.getTable().getColumnIterator();
-        while (iter.hasNext()) {
-            Column column = (Column) iter.next();
-            columnNames.add(column.getName());
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:6033/io", "root", null);
+        Statement statement = con.createStatement();
+
+        ResultSet rs = statement.executeQuery("SELECT * FROM "+classInfo.getTable().getName());
+        ResultSetMetaData rsmt = rs.getMetaData();
+        
+        for(int i=0; i<rsmt.getColumnCount(); i++){
+            columnNames.add(rsmt.getColumnName(i+1));
         }
         this.columns = Arrays.copyOf(columnNames.toArray(), columnNames.size(), String[].class);
     }
@@ -77,5 +80,5 @@ public class ListTableFrame extends JFrame {
         }
         this.data = objects.toArray(new Object[0][]);
     }
-   
+
 }
