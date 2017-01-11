@@ -12,7 +12,7 @@ package util;
 public class ActionCommands {
 
     public static final String ADD_STUDENT = "Add student";
-    public static final String LIST_STUDENT = "List students";
+    public static final String LIST_DATA = "List data";
     public static final String ADD_TEACHER = "Add teacher";
 
 }

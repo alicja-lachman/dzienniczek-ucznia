@@ -10,11 +10,16 @@
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/entity/Nauczyciele.java</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/controller/ApplicationController.java</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/view/ApplicationView.java</file>
+            <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/entity/Rodzice.java</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/hibernate.cfg.xml</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/ioswingv2/IOSWINGv2.java</file>
+            <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/entity/Wydarzenie.java</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/entity/Uczniowie.java</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/view/dialog/AddStudentDialog.java</file>
+            <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/entity/Wiadomosc.hbm.xml</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/view/listing/TableListingWindow.java</file>
+            <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/entity/Uzytkownicy.hbm.xml</file>
+            <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/entity/Nauczyciele.hbm.xml</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/util/ClassDataParser.java</file>
             <file>file:/C:/Users/Wojtek/Desktop/All/studiowe/IO/dzienniczek-ucznia/IOSWINGv2/src/util/HibernateUtil.java</file>
         </group>

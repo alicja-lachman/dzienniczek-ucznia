@@ -35,15 +35,11 @@ public class ApplicationController implements ActionListener {
                 dialog = new AddTeacherDialog(view);
                 dialog.setVisible(true);
                 break;
-            case (ActionCommands.LIST_STUDENT):
+            case (ActionCommands.LIST_DATA):
                 dialog = new ListDialog(view);
                 dialog.setVisible(true);
                 break;
 
         }
-    }
-
-    private void listAllStudents() {
-        
     }
 }
