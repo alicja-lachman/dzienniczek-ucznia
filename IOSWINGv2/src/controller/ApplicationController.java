@@ -2,10 +2,13 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JDialog;
 import util.ActionCommands;
 import view.ApplicationView;
 import view.dialog.AddGradeDialog;
 import view.dialog.AddStudentDialog;
+import view.dialog.AddTeacherDialog;
+import view.dialog.ListDialog;
 
 /**
  *
@@ -23,22 +26,25 @@ public class ApplicationController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        JDialog dialog;
         switch (e.getActionCommand()) {
             case (ActionCommands.ADD_STUDENT):
-                AddStudentDialog dialog = new AddStudentDialog(view);
+                dialog = new AddStudentDialog(view);
                 dialog.setVisible(true);
                 break;
-            case (ActionCommands.LIST_STUDENT):
-                listAllStudents();
+            case (ActionCommands.ADD_TEACHER):
+                dialog = new AddTeacherDialog(view);
+                dialog.setVisible(true);
                 break;
-            case (ActionCommands.ADD_GRADE):
+            case (ActionCommands.LIST_DATA):
+                dialog = new ListDialog(view);
+                dialog.setVisible(true);
+                break;
+   			case (ActionCommands.ADD_GRADE):
                 AddGradeDialog gradeDialog = new AddGradeDialog(view);
                 gradeDialog.setVisible(true);
                 break;
+
         }
-    }
-
-    private void listAllStudents() {
-
     }
 }

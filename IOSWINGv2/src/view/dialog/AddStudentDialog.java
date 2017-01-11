@@ -180,8 +180,7 @@ public class AddStudentDialog extends JDialog {
         }
 
         //find created user in database
-        List<Uzytkownicy> uzytkownicy = new ArrayList<>();
-        uzytkownicy = session.createCriteria(Uzytkownicy.class)
+        List<Uzytkownicy> uzytkownicy = session.createCriteria(Uzytkownicy.class)
                 .list();
 
         //most recently created user

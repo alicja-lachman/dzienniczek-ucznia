@@ -46,15 +46,20 @@ public class ApplicationView extends JFrame {
         addStudentItem.addActionListener(listener);
         addMenu.add(addStudentItem);
 
-        JMenu gradeMenu = new JMenu("Add new grade");
+  		JMenu gradeMenu = new JMenu("Add new grade");
         JMenuItem addGradeItem = new JMenuItem("Add new grade");
         addGradeItem.setActionCommand(ActionCommands.ADD_GRADE);
         addGradeItem.addActionListener(listener);
         gradeMenu.add(addGradeItem);
 
-        JMenu listMenu = new JMenu("List all...");
-        JMenuItem listAllStudents = new JMenuItem("List all students");
-        listAllStudents.setActionCommand(ActionCommands.LIST_STUDENT);
+        JMenuItem addTeacherItem = new JMenuItem("Add teacher");
+        addTeacherItem.setActionCommand(ActionCommands.ADD_TEACHER);
+        addTeacherItem.addActionListener(listener);
+        addMenu.add(addTeacherItem);
+
+        JMenu listMenu = new JMenu("List...");
+        JMenuItem listAllStudents = new JMenuItem("List table");
+        listAllStudents.setActionCommand(ActionCommands.LIST_DATA);
         listAllStudents.addActionListener(listener);
 
         listMenu.add(listAllStudents);
