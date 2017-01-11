@@ -34,6 +34,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import util.ClassDataParser;
 import util.HibernateUtil;
+import util.UserDataParser;
 
 /**
  *
@@ -214,24 +215,24 @@ public class AddGradeDialog extends JDialog {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query q = session.createQuery("from Przedmioty where nazwa like "
-                + (String) subject.getSelectedItem());
+        Query q = session.createQuery("from Przedmioty where nazwa like '"
+                + (String) subject.getSelectedItem()+"'");
 
         Przedmioty dbSubject = (Przedmioty) q.list().get(0);
         //create new grade
         Query query = session.createQuery("from Nauczyciele where idn = 1 ");
         Nauczyciele dbTeacher = (Nauczyciele) query.list().get(0);
 
-        Query queryUser = session.createQuery("from Uzytkownicy where imie like "
-                + student.getSelectedItem()
-                + " and nazwisko like "
-                + student.getSelectedItem());
+        Query queryUser = session.createQuery("from Uzytkownicy where imie like '"
+                + UserDataParser.getName((String)student.getSelectedItem()) +"'"
+                + " and nazwisko like '"
+                + UserDataParser.getSurname((String)student.getSelectedItem())+"'");
         Uzytkownicy dbUser = (Uzytkownicy) queryUser.list().get(0);
 
         Query queryStudent = session.createQuery("from Uczniowie where Uzytkownicy_iduz = "
                 + dbUser.getIduz());
-
-        Uczniowie dbStudent = (Uczniowie) queryStudent.list().get(0);
+List<Uczniowie> studentList = queryStudent.list();
+        Uczniowie dbStudent = studentList.get(0);
 
         Oceny newGrade = new Oceny();
         newGrade.setNauczyciele(dbTeacher);
@@ -253,7 +254,7 @@ public class AddGradeDialog extends JDialog {
 
         StringBuilder userIds = new StringBuilder();
         for (Uczniowie student : students) {
-            userIds.append(student.getIdu() + ",");
+            userIds.append(student.getUzytkownicy().getIduz()+ ",");
         }
         userIds.deleteCharAt(userIds.length()-1);
         return userIds.toString();
