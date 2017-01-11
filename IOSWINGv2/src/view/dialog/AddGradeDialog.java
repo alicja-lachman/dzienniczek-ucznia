@@ -216,7 +216,7 @@ public class AddGradeDialog extends JDialog {
         session.beginTransaction();
 
         Query q = session.createQuery("from Przedmioty where nazwa like '"
-                + (String) subject.getSelectedItem()+"'");
+                + (String) subject.getSelectedItem() + "'");
 
         Przedmioty dbSubject = (Przedmioty) q.list().get(0);
         //create new grade
@@ -224,14 +224,14 @@ public class AddGradeDialog extends JDialog {
         Nauczyciele dbTeacher = (Nauczyciele) query.list().get(0);
 
         Query queryUser = session.createQuery("from Uzytkownicy where imie like '"
-                + UserDataParser.getName((String)student.getSelectedItem()) +"'"
+                + UserDataParser.getName((String) student.getSelectedItem()) + "'"
                 + " and nazwisko like '"
-                + UserDataParser.getSurname((String)student.getSelectedItem())+"'");
+                + UserDataParser.getSurname((String) student.getSelectedItem()) + "'");
         Uzytkownicy dbUser = (Uzytkownicy) queryUser.list().get(0);
 
         Query queryStudent = session.createQuery("from Uczniowie where Uzytkownicy_iduz = "
                 + dbUser.getIduz());
-List<Uczniowie> studentList = queryStudent.list();
+        List<Uczniowie> studentList = queryStudent.list();
         Uczniowie dbStudent = studentList.get(0);
 
         Oceny newGrade = new Oceny();
@@ -254,9 +254,9 @@ List<Uczniowie> studentList = queryStudent.list();
 
         StringBuilder userIds = new StringBuilder();
         for (Uczniowie student : students) {
-            userIds.append(student.getUzytkownicy().getIduz()+ ",");
+            userIds.append(student.getUzytkownicy().getIduz() + ",");
         }
-        userIds.deleteCharAt(userIds.length()-1);
+        userIds.deleteCharAt(userIds.length() - 1);
         return userIds.toString();
     }
 

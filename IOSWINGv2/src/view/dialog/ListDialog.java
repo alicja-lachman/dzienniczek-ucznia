@@ -102,7 +102,7 @@ public class ListDialog extends JDialog {
 
         setTitle("Choose table");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(getParent());
+        setLocationRelativeTo(null);
         getRootPane().setDefaultButton(okButton);
 
     }

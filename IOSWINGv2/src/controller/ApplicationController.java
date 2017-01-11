@@ -40,7 +40,7 @@ public class ApplicationController implements ActionListener {
                 dialog = new ListDialog(view);
                 dialog.setVisible(true);
                 break;
-   			case (ActionCommands.ADD_GRADE):
+            case (ActionCommands.ADD_GRADE):
                 AddGradeDialog gradeDialog = new AddGradeDialog(view);
                 gradeDialog.setVisible(true);
                 break;
